@@ -1,11 +1,11 @@
 import { Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put } from "@nestjs/common";
-import { TaskcharacterService } from "./taskcharacter.service";
+import { CharacterService } from "./character.service";
 import { EstatusType } from "@prisma/client";
 
 @Controller('character')
-export class TaskcharacterController {
+export class CharacterController {
 
-    constructor(private readonly taskService : TaskcharacterService) {}
+    constructor(private readonly taskService : CharacterService) {}
 
     @Get()
     async getAllTask() {

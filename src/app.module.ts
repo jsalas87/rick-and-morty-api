@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { TaskcharacterModule } from './taskcharacter/taskcharacter.module';
+import { CharacterModule } from './taskcharacter/character.module';
 
 @Module({
-  imports: [TaskcharacterModule],
+  imports: [CharacterModule],
   controllers: [],
   providers: [],
 })

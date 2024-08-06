@@ -1,11 +1,11 @@
 import { Injectable } from "@nestjs/common";
 import { EstatusType } from "@prisma/client";
-import { CharactersService } from "src/characters/characters.service";
+import { TaskService } from "src/task/task.service";
 
 @Injectable()
-export class TaskcharacterService {
+export class CharacterService {
 
-    constructor (private character : CharactersService){}
+    constructor (private character : TaskService){}
 
     async getAllTask() : Promise<EstatusType[]> {
         return this.character.estatusType.findMany()
