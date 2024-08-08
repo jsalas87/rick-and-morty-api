@@ -34,8 +34,7 @@ En contrucción.
 ## Backend
 Esta basado en el principio de Clean Architecture, con una arquitectura de capas.
 
-![alt text](docs/circular
-.png)
+![alt text](docs/circular.png)
 
 ### Estructura de paquetes
 
