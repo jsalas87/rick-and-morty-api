@@ -1,8 +1,8 @@
 import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
-import { CharacterAll } from "src/domain/character/CharacterAll";
-import { CharacterPrisma } from "src/domain/character/CharacterPrisma";
-import { RequestCharacterDTO } from "src/dto/character/RequestCharacterDTO";
-import { TaskService } from "src/task/task.service";
+import { CharacterAll } from "../domain/character/CharacterAll";
+import { CharacterPrisma } from "../domain/character/CharacterPrisma";
+import { RequestCharacterDTO } from "../dto/character/RequestCharacterDTO";
+import { TaskService } from "../task/task.service";
 
 @Injectable()
 export class CharacterService {

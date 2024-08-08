@@ -1,11 +1,10 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query } from "@nestjs/common";
 import { ParticipationService } from "./participation.service";
-import { RequestParticipationDTO } from "src/dto/participation/RequestParticipationDTO";
-import { ResponseParticipationDTO } from "src/dto/participation/ResponseParticipationDTO";
-import { ResponseCharacterDTO } from "src/dto/character/ResponseCharacterDTO";
-import { ResponseAllParticipationDTO } from "src/dto/participation/ResponseAllParticipationDTO";
-import { ResponseApparitionDTO } from "src/dto/participation/ResponseApparitionDTO";
-import { RequestApparitionDTO } from "src/dto/participation/RequestApparitionDTO";
+import { RequestParticipationDTO } from "../dto/participation/RequestParticipationDTO";
+import { ResponseParticipationDTO } from "../dto/participation/ResponseParticipationDTO";
+import { ResponseAllParticipationDTO } from "../dto/participation/ResponseAllParticipationDTO";
+import { ResponseApparitionDTO } from "../dto/participation/ResponseApparitionDTO";
+import { RequestApparitionDTO } from "../dto/participation/RequestApparitionDTO";
 
 @Controller('participation')
 export class ParticipationController {

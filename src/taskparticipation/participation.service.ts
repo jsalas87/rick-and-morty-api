@@ -1,13 +1,11 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
 import { Prisma } from "@prisma/client";
-import { log } from "console";
-import { ApparitionPrisma } from "src/domain/participation/ApparitionPrisma";
-import { ParticipationAll } from "src/domain/participation/ParticipationAll";
-import { ParticipationPrisma } from "src/domain/participation/ParticipationPrisma";
-import { RequestApparitionDTO } from "src/dto/participation/RequestApparitionDTO";
-import { RequestParticipationDTO } from "src/dto/participation/RequestParticipationDTO";
-import { ResponseApparitionDTO } from "src/dto/participation/ResponseApparitionDTO";
-import { TaskService } from "src/task/task.service";
+import { ApparitionPrisma } from "../domain/participation/ApparitionPrisma";
+import { ParticipationAll } from "../domain/participation/ParticipationAll";
+import { ParticipationPrisma } from "../domain/participation/ParticipationPrisma";
+import { RequestApparitionDTO } from "../dto/participation/RequestApparitionDTO";
+import { RequestParticipationDTO } from "../dto/participation/RequestParticipationDTO";
+import { TaskService } from "../task/task.service";
 
 @Injectable()
 export class ParticipationService {
