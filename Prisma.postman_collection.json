@@ -1,0 +1,280 @@
+{
+	"info": {
+		"_postman_id": "a3efdd3e-4bb1-477f-9aec-fc89d8e28a87",
+		"name": "Prisma",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5450107"
+	},
+	"item": [
+		{
+			"name": "characters",
+			"item": [
+				{
+					"name": "post character",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Juan Salas\",\r\n    \"estatus\": {\r\n        \"description\" : \"Alive\"\r\n    },\r\n    \"subCategory\": {\r\n        \"description\" : \"Human\"\r\n    },\r\n    \"type\": \"type\",\r\n    \"gender\": \"Male\",\r\n    \"image\": \"Image\",\r\n    \"url\": \"Image\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/character",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"character"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get character by estatus and subcategory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/character/estatus/alive/subcategory/human?page=0&lon=3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"character",
+								"estatus",
+								"alive",
+								"subcategory",
+								"human"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "lon",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all characters",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/character?page=2&lon=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"character"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "lon",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Juan Salas\",\r\n    \"estatus\": {\r\n        \"description\" : \"Alive\"\r\n    },\r\n    \"subCategory\": {\r\n        \"description\" : \"Human\"\r\n    },\r\n    \"type\": \"type\",\r\n    \"gender\": \"Male\",\r\n    \"image\": \"Image\",\r\n    \"url\": \"Image\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/character/23",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"character",
+								"23"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "suspender",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/character/23",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"character",
+								"23"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "participation",
+			"item": [
+				{
+					"name": "post participations",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"episode\": {\r\n        \"episode\" : \"S01E01\"\r\n    },\r\n    \"character\" : {\r\n        \"id\" : 23\r\n    },\r\n    \"apparitions\" : [\r\n        {\"init\" : \"02:01\", \"finish\" : \"02:59\"},\r\n        {\"init\" : \"04:00\", \"finish\" : \"04:59\"}\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/participation",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"participation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all participations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/participation?page=0&lon=5&characterStatus=SUSPENDED&episodeStatus=ACTIVE&season=SEASON 2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"participation"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "lon",
+									"value": "5"
+								},
+								{
+									"key": "characterStatus",
+									"value": "SUSPENDED"
+								},
+								{
+									"key": "episodeStatus",
+									"value": "ACTIVE"
+								},
+								{
+									"key": "season",
+									"value": "SEASON 2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizar aparicion",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"init\": \"05:00\",\r\n    \"finish\": \"05:59\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/participation/14",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"participation",
+								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eliminar personaje de un episodio",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/participation/episode/1/character/23",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"participation",
+								"episode",
+								"1",
+								"character",
+								"23"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

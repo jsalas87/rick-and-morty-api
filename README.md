@@ -22,17 +22,43 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+## Descripción
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+[Nest](https://github.com/nestjs/nest) API para personajes, episodios y apariciones de Rick and Morty.
 
-## Installation
+# Estado
+En contrucción.
+
+# Tecnologías Utilizadas
+
+## Backend
+Esta basado en el principio de Clean Architecture, con una arquitectura de capas.
+
+![alt text](docs/circular
+.png)
+
+### Estructura de paquetes
+
+Se definió la siguiente taxonomía de paquetes:
+
+* **domain:** Contiene las entidades y lógica de negocio fundamental.
+* **dto:** Define los objetos que son transferidos entre las capas de la aplicación.
+* **modulos:** Los modulos con sus capas service y controller. Aqui, llamados 'task*'
+    * **service:** Contiene la lógica de negocio y operaciones complejas.
+    * **controller:** Maneja las solicitudes HTTP.
+
+![alt text](docs/capas.png)
+
+## Base de datos
+- Se usa postgreSQL 15.
+
+## Instalación del entorno de Nest
 
 ```bash
 $ npm install
 ```
 
-## Running the app
+## Ejecutar la aplicación
 
 ```bash
 # development
@@ -58,16 +84,16 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
+## Soporte Nest
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
-## Stay in touch
+## Notas Adicionales
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- El archivo rickmorty.sql contiene datos básicos para hacer una ejecución elemental de la aplicación.
+- El archivo Prisma.postman_collection.json es una colección de postman con los curl de los servicios expuestos.
 
-## License
+# Autor
+[<img src="https://avatars.githubusercontent.com/u/37299779?s=400&u=e40bfe01a10c844ef8348b57774ffdb872a7d15a&v=4" width=115><br><sub>Juan Salas</sub>](https://github.com/jsalas87)
 
-Nest is [MIT licensed](LICENSE).
+

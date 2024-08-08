@@ -86,8 +86,6 @@ model CharacterApparition {
   id                       Int                    @id @default(autoincrement())
   characterParticipation   CharacterParticipation @relation(fields: [characterparticipationId], references: [id])
   characterparticipationId Int
-  initMin                  Int
-  initSec                  Int
-  finishMin                Int
-  finishSec                Int
+  init                     Int
+  finish                   Int
 }
