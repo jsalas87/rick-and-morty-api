@@ -9,6 +9,6 @@ export class ParticipationPrisma implements CharacterParticipation {
     characterId: number;
     episode : EpisodePrisma;
     character : CharacterPrisma;
-    apparitions : ApparitionPrisma[]
+    characterApparitions : ApparitionPrisma[]
 
 }

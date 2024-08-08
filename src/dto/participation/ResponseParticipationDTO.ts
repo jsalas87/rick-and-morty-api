@@ -17,7 +17,7 @@ export class ResponseParticipationDTO {
             id : participationPrisma.id,
             episode : ResponseEpisodeDTO.of(participationPrisma.episode),
             character : ResponseCharacterDTO.of(participationPrisma.character),
-            apparitions : participationPrisma.apparitions.map(a => ResponseApparitionDTO.of(a))
+            apparitions : participationPrisma.characterApparitions.map(a => ResponseApparitionDTO.of(a))
         }
 
     }

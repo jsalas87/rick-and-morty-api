@@ -1,9 +1,12 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
+import { Prisma } from "@prisma/client";
 import { log } from "console";
 import { ApparitionPrisma } from "src/domain/participation/ApparitionPrisma";
+import { ParticipationAll } from "src/domain/participation/ParticipationAll";
 import { ParticipationPrisma } from "src/domain/participation/ParticipationPrisma";
 import { RequestApparitionDTO } from "src/dto/participation/RequestApparitionDTO";
 import { RequestParticipationDTO } from "src/dto/participation/RequestParticipationDTO";
+import { ResponseApparitionDTO } from "src/dto/participation/ResponseApparitionDTO";
 import { TaskService } from "src/task/task.service";
 
 @Injectable()
@@ -119,6 +122,156 @@ export class ParticipationService {
 
         return participationPrisma;
 
+    }
+
+    async getAll(characterStatus?: string, episodeStatus?: string, season?: string, page?: string, lon?: string): Promise<ParticipationAll> {
+
+        const filters: Prisma.CharacterParticipationWhereInput = {};
+        var thePage = 0;
+        var take = lon ? Number(lon) : 5;
+
+        if (page) {
+            thePage = Number(page) * take
+        }
+
+        if (characterStatus) {
+            filters.character = {
+                estatus: {
+                    description: characterStatus
+                }
+            };
+        }
+
+        if (episodeStatus) {
+            filters.episode = {
+                estatus: {
+                    description: episodeStatus
+                }
+            };
+        }
+
+        if (season) {
+            filters.episode = {
+                subCategory: {
+                    description: season
+                }
+            };
+        }
+        const [participations, total] = await Promise.all([
+            this.taskService.characterParticipation.findMany({
+                where: filters,
+                skip: thePage,
+                take: take,
+                include: {
+                    episode: {
+                        include: {
+                            estatus: true,
+                            subCategory: true
+                        }
+                    },
+                    character: {
+                        include: {
+                            estatus: true,
+                            subCategory: true
+                        }
+                    },
+                    characterApparitions: true
+                }
+            }),
+            this.taskService.characterParticipation.count({
+                where: filters
+            })
+        ])
+        const particip = participations.map(a => Object.assign(new ParticipationPrisma(), a))
+        return {
+            info : {
+                page: thePage,
+                count: total,
+                page_size: take
+            },
+            participations : particip
+        }
+    }
+
+    async update(id : number, data : RequestApparitionDTO) : Promise<ApparitionPrisma> {
+
+        const actualApparition = await this.taskService.characterApparition.findUnique({
+            where : {
+                id
+            }
+        })
+
+        if(!actualApparition) throw new BadRequestException('No se encontro aparicion id '+id)
+
+        const initSec = this.convertToSeconds(data.init)
+        const finishSec = this.convertToSeconds(data.finish)
+
+        const apparitionExisting = await this.taskService.characterApparition.findFirst({
+            where: {
+                characterparticipationId: actualApparition.characterparticipationId,
+                    init: {
+                        gte: initSec,
+                        lte: finishSec,
+                    },
+                    finish: {
+                        gte: initSec,
+                        lte: finishSec,
+                    }
+            }
+        })
+
+        if (apparitionExisting) throw new BadRequestException('No se puede solapar aparicion en los min '+data.init+'-'+data.finish)
+
+        const requestApparitionDTO = Object.assign(new RequestApparitionDTO(), data)    
+        const apparition =  await this.taskService.characterApparition.update({
+            where : {
+                id : id
+            },
+            data : requestApparitionDTO.toDomain(actualApparition.characterparticipationId),
+            include : {
+                characterParticipation : true
+            }
+        })
+
+        return Object.assign(new ApparitionPrisma(), apparition)
+    }
+
+    async delete(characterId : number, episodeId : number) : Promise<ParticipationPrisma> {
+        const participation = await this.taskService.characterParticipation.findFirst({
+            where : {
+                characterId : characterId,
+                episodeId : episodeId
+            },
+            include: {
+                episode: {
+                    include: {
+                        estatus: true,
+                        subCategory: true
+                    }
+                },
+                character: {
+                    include: {
+                        estatus: true,
+                        subCategory: true
+                    }
+                },
+                characterApparitions: true
+            }
+        })
+
+        if(!participation) throw new BadRequestException('No se encontro el  personaje en el episodio')
+
+        await this.taskService.characterApparition.deleteMany({
+            where : {
+                characterparticipationId : participation.id
+            }
+        })
+        await this.taskService.characterParticipation.delete({
+            where : {
+                id : participation.id
+            }
+        })
+        return Object.assign(new ParticipationPrisma(), participation)
     }
 
     convertToSeconds(time: string): number {

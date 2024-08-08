@@ -6,5 +6,5 @@ export class ApparitionPrisma implements CharacterApparition {
     characterparticipationId: number;
     init: number;
     finish: number;
-    participation : ParticipationPrisma;
+    characterParticipation : ParticipationPrisma;
 }
