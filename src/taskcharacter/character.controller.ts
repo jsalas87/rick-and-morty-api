@@ -1,8 +1,8 @@
 import { Body, Controller, Delete, Get, NotFoundException, Param, ParseIntPipe, Post, Put, Query } from "@nestjs/common";
 import { CharacterService } from "./character.service";
-import { RequestCharacterDTO } from "src/dto/character/RequestCharacterDTO";
-import { ResponseCharacterDTO } from "src/dto/character/ResponseCharacterDTO";
-import { ResponseAllCharacterDTO } from "src/dto/character/ResponseAllCharacterDTO";
+import { RequestCharacterDTO } from "../dto/character/RequestCharacterDTO";
+import { ResponseCharacterDTO } from "../dto/character/ResponseCharacterDTO";
+import { ResponseAllCharacterDTO } from "../dto/character/ResponseAllCharacterDTO";
 
 @Controller('character')
 export class CharacterController {
